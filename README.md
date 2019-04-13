@@ -1,4 +1,4 @@
-# Udacity-FSND-Logs-Analysis-Python
+# Udacity-FSND-Logs-Analysis-Python :trophy:
 
 # Logs Analysis Project
 
@@ -6,7 +6,7 @@
 
 ## [Project_Specification](Project_Specification.md)
 
-## Questions
+## Questions :construction:
 1. What are the most popular three articles of all time?
   Which articles have been accessed the most?
   Present this information as a sorted list with the most popular article at the top
@@ -21,7 +21,7 @@
 * psycopg2
 * Postgresql 9.5.16
 
-## How to run
+## How to run :dart:
 
 * load the data onto the database
 ```sql
