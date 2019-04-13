@@ -37,6 +37,29 @@ psql -d news
 ### Create Views:blush:
 
 ```sql
+CREATE VIEW author_info AS
+SELECT authors.name, articles.title, articles.slug
+FROM articles, authors
+WHERE articles.author = authors.id
+ORDER BY authors.name;
+```
+
+```sql
+CREATE VIEW path_view AS
+SELECT path, COUNT(*) AS view
+FROM log
+GROUP BY path
+ORDER BY path;
+```
+
+```sql
+CREATE VIEW article_view AS
+SELECT author_info.name, author_info.title, path_view.view
+FROM author_info, path_view
+WHERE path_view.path = CONCAT('/article/', author_info.slug)
+ORDER BY author_info.name;
+```
+```sql
 CREATE VIEW total_view AS
 SELECT date(time), COUNT(*) AS views
 FROM log 
