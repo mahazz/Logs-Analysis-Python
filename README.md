@@ -6,7 +6,7 @@
 
 ## [Project_Specification](Project_Specification.md)
 
-## Questions :construction:
+## Questions :construction::triangular_flag_on_post:
 1. What are the most popular three articles of all time?
   Which articles have been accessed the most?
   Present this information as a sorted list with the most popular article at the top
@@ -16,7 +16,7 @@
 3. On which days did more than 1% of requests lead to errors?
   The log table includes a column status that indicates the HTTP status code that the news site sent to the user's browser.
 
-## Requirements
+## Requirements:checkered_flag:
 * Python 2.7.12
 * psycopg2
 * Postgresql 9.5.16
@@ -34,7 +34,7 @@ psql -d news
 * create views
 * python2 logs_analysis.py
 
-### Create Views
+### Create Views:blush:
 
 ```sql
 CREATE VIEW total_view AS
