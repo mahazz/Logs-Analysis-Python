@@ -32,48 +32,25 @@ psql -d news
 ### Create Views:blush:
 
 ```sql
-CREATE VIEW author_info AS
-SELECT authors.name, articles.title, articles.slug
-FROM articles, authors
-WHERE articles.author = authors.id
-ORDER BY authors.name;
-```
-
-```sql
-CREATE VIEW path_view AS
-SELECT path, COUNT(*) AS view
-FROM log
-GROUP BY path
-ORDER BY path;
-```
-
-```sql
-CREATE VIEW article_view AS
-SELECT author_info.name, author_info.title, path_view.view
-FROM author_info, path_view
-WHERE path_view.path = CONCAT('/article/', author_info.slug)
-ORDER BY author_info.name;
-```
-```sql
-CREATE VIEW total_view AS
-SELECT date(time), COUNT(*) AS views
-FROM log 
-GROUP BY date(time)
-ORDER BY date(time);
-```
-
-```sql
-CREATE VIEW error_view AS
-SELECT date(time), COUNT(*) AS errors
-FROM log WHERE status = '404 NOT FOUND' 
+CREATE VIEW total_errors AS
+SELECT date(time), COUNT(status) AS errors
+FROM log WHERE status != '200 OK' 
 GROUP BY date(time) 
-ORDER BY date(time);
+ORDER BY errors DESC;
 ```
 
 ```sql
-CREATE VIEW error_rate AS
-SELECT total_view.date, (100.0*error_view.errors/total_view.views) AS percentage
-FROM total_view, error_view
-WHERE total_view.date = error_view.date
-ORDER BY total_view.date;
+CREATE VIEW total_all_status AS
+SELECT date(time), COUNT(status) AS all_status
+FROM log
+GROUP BY date(time)
+ORDER BY all_status DESC;
 ```
+
+```sql
+CREATE VIEW errors_requests AS
+select total_all_status.date, (100.0 * total_errors.errors/total_all_status.all_status) AS requests
+from total_errors, total_all_status where errors_requests.requests > 1
+order by total_all_status.date;
+```
+
