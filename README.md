@@ -1,4 +1,3 @@
-# Udacity-FSND-Logs-Analysis-Python :trophy:
 
 # Logs Analysis Project
 
